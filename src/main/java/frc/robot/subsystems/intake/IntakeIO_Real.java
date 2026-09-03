@@ -1,5 +1,3 @@
 package frc.robot.subsystems.intake;
 
-public class IntakeIO_Real {
-    
-}
+public class IntakeIO_Real {}

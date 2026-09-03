@@ -7,8 +7,14 @@ package frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
+
+  public final ShooterIO io;
+  public final ShooterIOInputsAutoLogged inputs = new ShooterIOInputsAutoLogged();
+
   /** Creates a new Shooter. */
-  public Shooter() {}
+  public Shooter(ShooterIO io) {
+    this.io = io;
+  }
 
   @Override
   public void periodic() {
