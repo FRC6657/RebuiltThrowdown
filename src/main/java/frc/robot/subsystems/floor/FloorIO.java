@@ -1,5 +1,3 @@
 package frc.robot.subsystems.floor;
 
-public interface FloorIO {
-    
-}
+public interface FloorIO {}

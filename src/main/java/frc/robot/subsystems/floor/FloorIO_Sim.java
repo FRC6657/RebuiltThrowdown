@@ -1,5 +1,3 @@
 package frc.robot.subsystems.floor;
 
-public class FloorIO_Sim implements FloorIO {
-    
-}
+public class FloorIO_Sim implements FloorIO {}
