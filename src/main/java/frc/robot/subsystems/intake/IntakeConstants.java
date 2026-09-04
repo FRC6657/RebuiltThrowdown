@@ -47,7 +47,7 @@ public class IntakeConstants {
         public static enum ExtensionSetpoint {
             RETRACTED_SLOW(MIN_SETPOINT + 1, 5, 40),
             RETRACTED_FAST(MIN_SETPOINT + 1, 80, 160),
-            EXTENDED_SLOW(MAX_SETPOINT, 5, 40),
+            EXTENDED_SLOW(MAX_SETPOINT, 5, 40);
         }
     }
 }

@@ -15,7 +15,10 @@ public class GlobalConstants {
     Swerve_BR_T(8),
     Swerve_Pigeon(9),
     Shooter_One(10),
-    Shooter_Two(11);
+    Shooter_Two(11),
+    Intake_Extension(12),
+    Intake_Wheels(13);
+
 
     public int id;
 

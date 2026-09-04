@@ -25,9 +25,7 @@ public interface IntakeIO {
     public default void changeSetpoint(ExtensionSetpoint setpoint) {}
 
     public default void changeSetpoint(double setpoint) {}
-
-        @return
-
+    
     public default boolean atSetpoint() {
         return false;
     }

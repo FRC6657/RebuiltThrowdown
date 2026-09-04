@@ -13,28 +13,18 @@ public class Intake extends SubsystemBase{
     
     public IntakeIO io;
     public IntakeIOInputsAutoLogged inputs = new IntakeIOInputsAutoLogged();
-    
-        @param io
 
     public Intake(IntakeIO io) {
         this.io = io;
     }
 
-        @param setpoint
-        @return
-
     public Command changeSetpoint(ExtensionSetpoint setpoint) {
         return this.runOnce(() -> io.changeSetpoint(setpoint));
     }
 
-        @param setpoint
-        @return
-
     public Command changeSetpoint(double setpoint) {
         return this.runOnce(() -> io.changeSetpoint(setpoint));
     }
-
-        @return
     
     @AutoLogOutput(key = "AtSetpoint/Intake")
     public boolean atSetpoint() {
