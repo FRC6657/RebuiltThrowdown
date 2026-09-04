@@ -19,7 +19,6 @@ public class GlobalConstants {
     Intake_Extension(12),
     Intake_Wheels(13);
 
-
     public int id;
 
     CAN(int id) {

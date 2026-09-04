@@ -6,7 +6,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import frc.robot.GlobalConstants;
 
-
 public class FloorIO_Real implements FloorIO {
 
   TalonFX motorOne = new TalonFX(GlobalConstants.CAN.Floor.id);

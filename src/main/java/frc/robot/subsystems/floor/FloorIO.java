@@ -2,7 +2,6 @@ package frc.robot.subsystems.indexer.floor;
 
 import org.littletonrobotics.junction.AutoLog;
 
-
 public interface FloorIO {
 
   @AutoLog
@@ -15,7 +14,6 @@ public interface FloorIO {
     public double motorTwoVoltage = 0.0; // Volts
     public double motorTwoStatorCurrent = 0.0; // Amps
   }
-
 
   public default void updateInputs(FloorIOInputs inputs) {}
 

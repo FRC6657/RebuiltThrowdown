@@ -6,13 +6,13 @@ package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Shooter extends SubsystemBase {
+public class Flywheel extends SubsystemBase {
 
-  public final ShooterIO io;
-  public final ShooterIOInputsAutoLogged inputs = new ShooterIOInputsAutoLogged();
+  public final FlywheelIO io;
+  public final FlywheelIOInputsAutoLogged inputs = new FlywheelIOInputsAutoLogged();
 
-  /** Creates a new Shooter. */
-  public Shooter(ShooterIO io) {
+  /** Creates a new Flywheel. */
+  public Flywheel(FlywheelIO io) {
     this.io = io;
   }
 
