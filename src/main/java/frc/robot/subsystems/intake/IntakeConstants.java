@@ -47,7 +47,46 @@ public class IntakeConstants {
     public static enum ExtensionSetpoint {
       RETRACTED_SLOW(MIN_SETPOINT + 1, 5, 40),
       RETRACTED_FAST(MIN_SETPOINT + 1, 80, 160),
-      EXTENDED_SLOW(MAX_SETPOINT, 5, 40);
+      EXTENDED_SLOW(MAX_SETPOINT, 5, 40),
+      EXTENDED_FAST(MAX_SETPOINT, 160, 320),
+      SHUFFLE_IN(MIN_SETPOINT + 1, 80, 160),
+      SHUFFLE_OUT(SHUFFLE_SETPOINT, 80, 160),
+      Off(MIN_SETPOINT + 1, 0, 0);
+
+      public final double position;
+      public final double velocity;
+      public final double acceleration;
+
+      private ExtensionSetpoint(double position, double velocity, double acceleration) {
+        this.position = position;
+        this.velocity = velocity;
+        this.acceleration = acceleration;
+      }
     }
+  }
+
+  public class Roller {
+
+    public static final DCMotor MOTOR = DCMotor.getFalcon500(1);
+    public static final double GEAR_RATIO = 24d / 11d;
+
+    public static final TalonFXConfiguration CONFIG =
+        new TalonFXConfiguration()
+            .withMotorOutput(
+                new MotorOutputConfigs()
+                    .withInverted(InvertedValue.CounterClockwise_Positive)
+                    .withNeutralMode(NeutralModeValue.Coast))
+            .withCurrentLimits(
+                new CurrentLimitsConfigs()
+                    .withSupplyCurrentLimit(40)
+                    .withStatorCurrentLimit(80)
+                    .withSupplyCurrentLimitEnable(true)
+                    .withStatorCurrentLimitEnable(true));
+    
+    public static final double Off = 0.0; //No power
+
+    public static final double FORWARD = 12;
+    public static final double REVERSE = -12;
+    public static final double SHUFFLE = 4;
   }
 }
