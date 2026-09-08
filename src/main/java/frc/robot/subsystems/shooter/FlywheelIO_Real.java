@@ -1,8 +1,8 @@
 package frc.robot.subsystems.shooter;
 
-import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -10,14 +10,14 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.GlobalConstants;
 
-public class ShooterIO_Real implements ShooterIO {
+public class FlywheelIO_Real implements FlywheelIO {
 
   private SparkMax motorOne;
   private SparkMax motorTwo;
 
-  private PIDController pid = new PIDController(0, 0, 0); 
+  private PIDController pid = new PIDController(0, 0, 0);
 
-  public ShooterIO_Real() {
+  public FlywheelIO_Real() {
     motorOne = new SparkMax(GlobalConstants.CAN.Shooter_One.id, MotorType.kBrushless);
     motorTwo = new SparkMax(GlobalConstants.CAN.Shooter_Two.id, MotorType.kBrushless);
     motorOne.setCANTimeout(250);
@@ -27,7 +27,7 @@ public class ShooterIO_Real implements ShooterIO {
     config.inverted(false);
     config.smartCurrentLimit(ShooterConstants.currentLimit);
     config.idleMode(IdleMode.kCoast);
-    
+
     motorOne.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     motorTwo.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
