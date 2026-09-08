@@ -2,7 +2,7 @@ package frc.robot;
 
 public class GlobalConstants {
 
-  public static final double kMainLoopFrequency = 50; // Hz
+  public static final double mainLoopFrequency = 50; // Hz
 
   public static enum CAN {
     Swerve_FL_D(1),
@@ -17,7 +17,9 @@ public class GlobalConstants {
     Shooter_One(10),
     Shooter_Two(11),
     Intake_Extension(12),
-    Intake_Wheels(13);
+    Intake_Wheels(13),
+    Floor(14),
+    Ceiling_Wall(15);
 
     public int id;
 

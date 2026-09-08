@@ -1,4 +1,4 @@
-package frc.robot.subsystems.indexer.floor;
+package frc.robot.subsystems.floor;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
@@ -8,6 +8,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.system.plant.DCMotor;
 
+public class FloorConstants {
 
   public static final double Off = 0.0; 
   public static final double FORWARD = 12; // 6V forward (move game pieces toward tunnel)
