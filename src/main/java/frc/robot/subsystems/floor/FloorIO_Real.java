@@ -1,4 +1,4 @@
-package frc.robot.subsystems.indexer.floor;
+package frc.robot.subsystems.floor;
 
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VoltageOut;

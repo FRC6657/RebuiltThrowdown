@@ -92,7 +92,7 @@ public class MAXSwerve extends SubsystemBase {
         new Rotation2d(
             kinematics.toChassisSpeeds(getModuleStates()).omegaRadiansPerSecond
                 * 1
-                / GlobalConstants.kMainLoopFrequency);
+                / GlobalConstants.mainLoopFrequency);
 
     lastHeading = lastHeading.plus(gyroDelta);
 
@@ -167,7 +167,7 @@ public class MAXSwerve extends SubsystemBase {
    * @param speeds desired chassis speed
    */
   public void runChassisSpeeds(ChassisSpeeds speeds) {
-    speeds = ChassisSpeeds.discretize(speeds, 1 / GlobalConstants.kMainLoopFrequency);
+    speeds = ChassisSpeeds.discretize(speeds, 1 / GlobalConstants.mainLoopFrequency);
     SwerveModuleState[] setpointStates = kinematics.toSwerveModuleStates(speeds);
     SwerveDriveKinematics.desaturateWheelSpeeds(setpointStates, MAXSwerveConstants.kMaxDriveSpeed);
 
