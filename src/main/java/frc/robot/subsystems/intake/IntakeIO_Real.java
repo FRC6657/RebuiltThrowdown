@@ -2,13 +2,12 @@ package frc.robot.subsystems.intake;
 
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import frc.robot.GlobalConstants;
 import frc.robot.subsystems.intake.IntakeConstants.Extension.ExtensionSetpoint;
 
-public class IntakeIO_Real {
+public class IntakeIO_Real implements IntakeIO {
 
   private TalonFX extensionMotor = new TalonFX(GlobalConstants.CAN.Intake_Extension.id);
   private TalonFX rollerMotor = new TalonFX(GlobalConstants.CAN.Intake_Wheels.id);
@@ -98,10 +97,11 @@ public class IntakeIO_Real {
 
   @Override
   public boolean atSetpoint() {
-    return MathUtil.isNear(
-        extensionMotor.getGoal().position,
-        extensionMotor.getPosition().getValueAsDouble()
-            * IntakeConstants.Extension.CONVERSION_FACTOR,
-        IntakeConstants.Extension.POSITION_TOLERANCE);
+    //   return MathUtil.isNear(
+    //     extensionMotor.getGoal().position,
+    //       extensionMotor.getPosition().getValueAsDouble()
+    //           * IntakeConstants.Extension.CONVERSION_FACTOR,
+    //       IntakeConstants.Extension.POSITION_TOLERANCE);
+    return true; // FIX
   }
 }
