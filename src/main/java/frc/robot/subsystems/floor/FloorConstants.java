@@ -10,14 +10,14 @@ import edu.wpi.first.math.system.plant.DCMotor;
 
 public class FloorConstants {
 
-  public static final double Off = 0.0; 
+  public static final double Off = 0.0;
   public static final double FORWARD = 12; // 6V forward (move game pieces toward tunnel)
   public static final double REVERSE = -6; // 6V reverse (eject game pieces)
 
   public final double voltage = 0.0;
 
   public static final DCMotor MOTOR = DCMotor.getFalcon500(1);
-  public static final double GEAR_RATIO = 32d / 11d; 
+  public static final double GEAR_RATIO = 32d / 11d;
 
   public static final TalonFXConfiguration CONFIG =
       new TalonFXConfiguration()

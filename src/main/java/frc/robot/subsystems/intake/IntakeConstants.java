@@ -82,8 +82,8 @@ public class IntakeConstants {
                     .withStatorCurrentLimit(80)
                     .withSupplyCurrentLimitEnable(true)
                     .withStatorCurrentLimitEnable(true));
-    
-    public static final double Off = 0.0; //No power
+
+    public static final double Off = 0.0; // No power
 
     public static final double FORWARD = 12;
     public static final double REVERSE = -12;
