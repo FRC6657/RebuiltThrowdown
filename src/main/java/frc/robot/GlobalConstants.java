@@ -18,7 +18,8 @@ public class GlobalConstants {
     Intake_Wheels(11),
     Floor(12),
     Ceiling_Wall(13),
-    Shooter_Pivot(14);
+    Shooter_Pivot(14),
+    Shooter_Flywheel(15);
 
     public int id;
 
