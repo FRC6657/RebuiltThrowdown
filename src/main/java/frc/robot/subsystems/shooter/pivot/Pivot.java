@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems.shooter.pivot;
 
-import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.littletonrobotics.junction.Logger;
 
 public class Pivot extends SubsystemBase {
 

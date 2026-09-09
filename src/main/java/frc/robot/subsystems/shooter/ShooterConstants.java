@@ -13,10 +13,11 @@ public class ShooterConstants {
   public static final double SUPPLY_LIMIT = 30; // Amps
   public static final double STATOR_LIMIT = 60; // Amps
 
-    public static final TalonFXConfiguration CONFIG =
+  public static final TalonFXConfiguration CONFIG =
       new TalonFXConfiguration()
           .withMotorOutput(new MotorOutputConfigs().withNeutralMode(NeutralModeValue.Brake))
-          .withFeedback(new FeedbackConfigs().withSensorToMechanismRatio(1)) // assuming this means 1:1 ratio?
+          .withFeedback(
+              new FeedbackConfigs().withSensorToMechanismRatio(1)) // assuming this means 1:1 ratio?
           .withSlot0(new Slot0Configs().withKS(0).withKP(250.0).withKD(0))
           .withCurrentLimits(
               new CurrentLimitsConfigs()

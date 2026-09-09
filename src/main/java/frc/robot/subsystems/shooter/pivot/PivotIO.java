@@ -3,7 +3,7 @@ package frc.robot.subsystems.shooter.pivot;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface PivotIO {
-    
+
   /** Logged sensor inputs for the hood motor. */
   @AutoLog
   public static class PivotIOInputs {
