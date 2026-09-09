@@ -4,6 +4,7 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.GlobalConstants;
 import frc.robot.subsystems.shooter.ShooterConstants;
+import frc.robot.subsystems.shooter.ShooterConstants.PivotConstants;
 
 public class PivotIO_Real implements PivotIO {
   private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Shooter_Pivot.id);
@@ -12,7 +13,7 @@ public class PivotIO_Real implements PivotIO {
       new PositionVoltage(1); // TODO: Replace with real number
 
   public PivotIO_Real() {
-    pivotMotor.getConfigurator().apply(ShooterConstants.CONFIG);
+    pivotMotor.getConfigurator().apply(PivotConstants.CONFIG);
 
     var position = pivotMotor.getPosition();
     var temp = pivotMotor.getDeviceTemp();
