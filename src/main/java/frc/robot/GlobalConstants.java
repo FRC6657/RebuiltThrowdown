@@ -14,12 +14,11 @@ public class GlobalConstants {
     Swerve_FR_T(6),
     Swerve_BR_T(8),
     Swerve_Pigeon(9),
-    Shooter_One(10),
-    Shooter_Two(11),
-    Intake_Extension(12),
-    Intake_Wheels(13),
-    Floor(14),
-    Ceiling_Wall(15);
+    Intake_Extension(10),
+    Intake_Wheels(11),
+    Floor(12),
+    Ceiling_Wall(13),
+    Shooter_Pivot(14);
 
     public int id;
 

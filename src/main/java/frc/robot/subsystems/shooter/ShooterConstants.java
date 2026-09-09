@@ -8,11 +8,11 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class ShooterConstants {
-    /** Degrees of hood travel per output shaft rotation. */
   public static final double CONVERSION_FACTOR = 360.0; // Degrees Per Rotation
 
   public static final double SUPPLY_LIMIT = 30; // Amps
   public static final double STATOR_LIMIT = 60; // Amps
+
     public static final TalonFXConfiguration CONFIG =
       new TalonFXConfiguration()
           .withMotorOutput(new MotorOutputConfigs().withNeutralMode(NeutralModeValue.Brake))
