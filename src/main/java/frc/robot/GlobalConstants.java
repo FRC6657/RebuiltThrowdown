@@ -14,7 +14,7 @@ public class GlobalConstants {
     Swerve_FR_T(6),
     Swerve_BR_T(8),
     Swerve_Pigeon(9),
-    Intake_Extension(10),
+    Intake_Pivot(10),
     Intake_Wheels(11),
     Floor(12),
     Ceiling_Wall(13),

@@ -1,35 +1,31 @@
 package frc.robot.subsystems.intake;
 
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import frc.robot.GlobalConstants;
-import frc.robot.subsystems.intake.IntakeConstants.Extension.ExtensionSetpoint;
+import frc.robot.subsystems.intake.IntakeConstants.Extension.PivotSetpoint;
 
 public class IntakeIO_Real implements IntakeIO {
 
-  private TalonFX extensionMotor = new TalonFX(GlobalConstants.CAN.Intake_Extension.id);
+  private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Intake_Pivot.id);
   private TalonFX rollerMotor = new TalonFX(GlobalConstants.CAN.Intake_Wheels.id);
 
   private VoltageOut rollerSetpoint = new VoltageOut(0);
-  private ExtensionSetpoint extensionSetpoint = ExtensionSetpoint.RETRACTED_FAST;
-
-  private ProfiledPIDController extensionPID =
-      new ProfiledPIDController(
-          1, 0, 0, new Constraints(extensionSetpoint.velocity, extensionSetpoint.velocity * 2));
+  private PivotSetpoint pivotSetpoint = PivotSetpoint.RETRACTED_FAST;
+  private final MotionMagicVoltage pivotRequest = new MotionMagicVoltage(0);
 
   public IntakeIO_Real() {
 
-    extensionMotor.getConfigurator().apply(IntakeConstants.Extension.CONFIG);
+    pivotMotor.getConfigurator().apply(IntakeConstants.Extension.CONFIG);
     rollerMotor.getConfigurator().apply(IntakeConstants.Roller.CONFIG);
 
-    var extensionPosition = extensionMotor.getPosition();
-    var extensionVelocity = extensionMotor.getVelocity();
-    var extensionAcceleration = extensionMotor.getAcceleration();
-    var extensionTemp = extensionMotor.getDeviceTemp();
-    var extensionVoltage = extensionMotor.getMotorVoltage();
-    var extensionStatorCurrent = extensionMotor.getStatorCurrent();
+    var extensionPosition = pivotMotor.getPosition();
+    var extensionVelocity = pivotMotor.getVelocity();
+    var extensionAcceleration = pivotMotor.getAcceleration();
+    var extensionTemp = pivotMotor.getDeviceTemp();
+    var extensionVoltage = pivotMotor.getMotorVoltage();
+    var extensionStatorCurrent = pivotMotor.getStatorCurrent();
 
     extensionPosition.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
     extensionVelocity.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
@@ -39,7 +35,7 @@ public class IntakeIO_Real implements IntakeIO {
     extensionVoltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
     extensionStatorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
 
-    extensionMotor.optimizeBusUtilization();
+    pivotMotor.optimizeBusUtilization();
 
     var rollerVoltage = rollerMotor.getMotorVoltage();
     var rollerStatorCurrent = rollerMotor.getSupplyCurrent();
@@ -49,7 +45,7 @@ public class IntakeIO_Real implements IntakeIO {
     rollerVoltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
     rollerStatorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
 
-    extensionMotor.setPosition(0);
+    pivotMotor.setPosition(0);
 
     rollerMotor.optimizeBusUtilization();
   }
@@ -57,38 +53,22 @@ public class IntakeIO_Real implements IntakeIO {
   @Override
   public void updateInputs(IntakeIOInputs inputs) {
 
-    extensionMotor.setControl(
-        new VoltageOut(
-            extensionPID.calculate(
-                extensionMotor.getPosition().getValueAsDouble()
-                    * IntakeConstants.Extension.CONVERSION_FACTOR)));
+    pivotMotor.setControl(pivotRequest.withPosition(pivotSetpoint.position));
 
     rollerMotor.setControl(rollerSetpoint);
 
     inputs.extensionPosition =
-        extensionMotor.getPosition().getValueAsDouble()
-            * IntakeConstants.Extension.CONVERSION_FACTOR;
+        pivotMotor.getPosition().getValueAsDouble() * IntakeConstants.Extension.CONVERSION_FACTOR;
     inputs.extensionVelocity =
-        extensionMotor.getVelocity().getValueAsDouble()
-            * IntakeConstants.Extension.CONVERSION_FACTOR;
+        pivotMotor.getVelocity().getValueAsDouble() * IntakeConstants.Extension.CONVERSION_FACTOR;
     inputs.extensionAcceleration =
-        extensionMotor.getAcceleration().getValueAsDouble()
+        pivotMotor.getAcceleration().getValueAsDouble()
             * IntakeConstants.Extension.CONVERSION_FACTOR;
-    inputs.extensionTemp = extensionMotor.getDeviceTemp().getValueAsDouble();
+    inputs.extensionTemp = pivotMotor.getDeviceTemp().getValueAsDouble();
   }
 
   @Override
-  public void changeSetpoint(ExtensionSetpoint setpoint) {
-
-    extensionPID.reset(
-        extensionMotor.getPosition().getValueAsDouble()
-            * IntakeConstants.Extension.CONVERSION_FACTOR,
-        extensionMotor.getVelocity().getValueAsDouble()
-            * IntakeConstants.Extension.CONVERSION_FACTOR);
-
-    extensionPID.setConstraints(new Constraints(setpoint.velocity, setpoint.acceleration));
-    extensionPID.setGoal(setpoint.position);
-  }
+  public void changeSetpoint(PivotSetpoint setpoint) {}
 
   @Override
   public void changeSetpoint(double setpoint) {

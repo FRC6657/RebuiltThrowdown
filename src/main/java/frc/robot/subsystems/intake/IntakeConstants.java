@@ -44,7 +44,7 @@ public class IntakeConstants {
                     .withStatorCurrentLimitEnable(true)
                     .withSupplyCurrentLimitEnable(true));
 
-    public static enum ExtensionSetpoint {
+    public static enum PivotSetpoint {
       RETRACTED_SLOW(MIN_SETPOINT + 1, 5, 40),
       RETRACTED_FAST(MIN_SETPOINT + 1, 80, 160),
       EXTENDED_SLOW(MAX_SETPOINT, 5, 40),
@@ -57,7 +57,7 @@ public class IntakeConstants {
       public final double velocity;
       public final double acceleration;
 
-      private ExtensionSetpoint(double position, double velocity, double acceleration) {
+      private PivotSetpoint(double position, double velocity, double acceleration) {
         this.position = position;
         this.velocity = velocity;
         this.acceleration = acceleration;
