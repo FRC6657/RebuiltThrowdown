@@ -2,6 +2,8 @@ package frc.robot.subsystems.shooter.pivot;
 
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.math.MathUtil;
 import frc.robot.GlobalConstants;
 import frc.robot.subsystems.shooter.ShooterConstants;
 import frc.robot.subsystems.shooter.ShooterConstants.PivotConstants;
@@ -10,7 +12,7 @@ public class PivotIO_Real implements PivotIO {
   private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Shooter_Pivot.id);
 
   private PositionVoltage positionVoltage =
-      new PositionVoltage(1); // TODO: Replace with real number
+      new PositionVoltage(PivotConstants.INITIAL_SETPOINT / ShooterConstants.CONVERSION_FACTOR); // TODO: Replace with real number
 
   public PivotIO_Real() {
     pivotMotor.getConfigurator().apply(PivotConstants.CONFIG);
@@ -43,7 +45,6 @@ public class PivotIO_Real implements PivotIO {
   @Override
   public void changeSetpoint(double setpoint) {
     // Clamp to safe range then convert degrees to rotations for the motor controller
-    positionVoltage.Position = 1;
-    //    MathUtil.clamp(setpoint, ShooterConstants.MIN_SETPOINT, ShooterConstants.MAX_SETPOINT);
+        MathUtil.clamp(setpoint, PivotConstants.MIN_SETPOINT, PivotConstants.MAX_SETPOINT);
   }
 }

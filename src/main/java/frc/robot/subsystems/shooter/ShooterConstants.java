@@ -12,7 +12,11 @@ public class ShooterConstants {
   public static final double CONVERSION_FACTOR = 360.0; // Degrees Per Rotation
 
   public class PivotConstants {
-    public static final double SUPPLY_LIMIT = 30; // Amps
+
+    public static final double INITIAL_SETPOINT = 30; // Deg TOTO: find real number
+    public static final double MIN_SETPOINT = 0; // Deg TODO: Check CAD
+    public static final double MAX_SETPOINT = 180; // Deg TODO: Check CAD
+    public static final double SUPPLY_LIMIT = 30; // Ampss
     public static final double STATOR_LIMIT = 60; // Amps
 
     public static final TalonFXConfiguration CONFIG =

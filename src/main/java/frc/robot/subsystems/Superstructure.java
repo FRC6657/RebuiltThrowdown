@@ -26,4 +26,6 @@ public class Superstructure {
     this.flywheel = flywheel;
     this.pivot = pivot;
   }
+
+  
 }

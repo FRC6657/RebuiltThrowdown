@@ -20,7 +20,7 @@ public class Floor extends SubsystemBase {
   public Command changeSetpoint(double setpoint) {
     return this.runOnce(
         () -> {
-          io.changeSetpoint(setpoint);
+          io.changeSetpoint(setpoint); // Volts
         });
   }
 
