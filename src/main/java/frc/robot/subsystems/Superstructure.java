@@ -4,9 +4,6 @@
 
 package frc.robot.subsystems;
 
-import org.littletonrobotics.junction.AutoLogOutput;
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -18,6 +15,8 @@ import frc.robot.subsystems.intake.IntakeConstants;
 import frc.robot.subsystems.intake.IntakeConstants.Roller;
 import frc.robot.subsystems.shooter.flywheel.Flywheel;
 import frc.robot.subsystems.shooter.pivot.Pivot;
+import org.littletonrobotics.junction.AutoLogOutput;
+import org.littletonrobotics.junction.Logger;
 
 /** The core class where all robot commands live. */
 public class Superstructure {
@@ -47,7 +46,7 @@ public class Superstructure {
     isShooting.onTrue(RunIndexer());
   }
 
-  Command RunIndexer(){
+  Command RunIndexer() {
     return Commands.parallel(null);
   }
 
@@ -63,11 +62,10 @@ public class Superstructure {
   public Command DisableShooting() {
     return Commands.runOnce(() -> shooting = false);
   }
-  
+
   public Command logMessage(String message) {
     return Commands.runOnce(() -> Logger.recordOutput("Command Log", message));
   }
-
 
   // #region Helper Sequences
 
