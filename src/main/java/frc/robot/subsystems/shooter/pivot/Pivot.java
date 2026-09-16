@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.shooter.pivot;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.littletonrobotics.junction.Logger;
 
@@ -15,6 +16,10 @@ public class Pivot extends SubsystemBase {
   /** Creates a new Pivot. */
   public Pivot(PivotIO io) {
     this.io = io;
+  }
+
+  public Command changeSetpointC(double setpoint) {
+    return this.runOnce(() -> io.changeSetpoint(setpoint));
   }
 
   public void changeSetpoint(double setpoint) {

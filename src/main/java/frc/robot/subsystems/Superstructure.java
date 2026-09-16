@@ -14,6 +14,8 @@ import frc.robot.subsystems.drive.MAXSwerve;
 import frc.robot.subsystems.floor.Floor;
 import frc.robot.subsystems.floor.FloorConstants;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeConstants;
+import frc.robot.subsystems.intake.IntakeConstants.Roller;
 import frc.robot.subsystems.shooter.flywheel.Flywheel;
 import frc.robot.subsystems.shooter.pivot.Pivot;
 
@@ -66,6 +68,41 @@ public class Superstructure {
     return Commands.runOnce(() -> Logger.recordOutput("Command Log", message));
   }
 
+
+  // #region Helper Sequences
+
+  public Command HomeRobot() {
+    return Commands.sequence(
+        logMessage("Home Robot"),
+        flywheel.changeSetpointC(0),
+        floor.changeSetpoint(FloorConstants.Off),
+        DisableShooting(),
+        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.RETRACTED_FAST),
+        intake.changeSetpoint(Roller.Off),
+        pivot.changeSetpointC(0));
+  }
+
+  public Command ExtendIntake() {
+    return Commands.sequence(
+        logMessage("Fuel Intake"),
+        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.EXTENDED_FAST),
+        intake.changeSetpoint(Roller.FORWARD));
+  }
+
+  public Command RetractIntake() {
+    return Commands.sequence(
+        logMessage("Intake Retract"),
+        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.RETRACTED_FAST));
+  }
+
+  public Command Dump() {
+    return Commands.sequence(
+        intake.changeSetpoint(Roller.FORWARD),
+        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.EXTENDED_FAST),
+        flywheel.changeSetpointC(-1000),
+        FloorReverse());
+  }
+
   public Command FloorForward() {
     return Commands.sequence(
         logMessage("Floor Forward"), floor.changeSetpoint(FloorConstants.FORWARD));
@@ -74,5 +111,9 @@ public class Superstructure {
   public Command FloorReverse() {
     return Commands.sequence(
         logMessage("Floor Reverse"), floor.changeSetpoint(FloorConstants.REVERSE));
+  }
+
+  public Command FloorOff() {
+    return Commands.sequence(logMessage("Floor Off"), floor.changeSetpoint(FloorConstants.Off));
   }
 }
