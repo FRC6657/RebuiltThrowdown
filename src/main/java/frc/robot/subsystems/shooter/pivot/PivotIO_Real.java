@@ -4,14 +4,13 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.math.MathUtil;
 import frc.robot.GlobalConstants;
-import frc.robot.subsystems.shooter.ShooterConstants;
 import frc.robot.subsystems.shooter.ShooterConstants.PivotConstants;
 
 public class PivotIO_Real implements PivotIO {
   private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Shooter_Pivot.id);
 
   private PositionVoltage positionVoltage =
-      new PositionVoltage(PivotConstants.INITIAL_SETPOINT / ShooterConstants.CONVERSION_FACTOR);
+      new PositionVoltage(PivotConstants.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
 
   public PivotIO_Real() {
     pivotMotor.getConfigurator().apply(PivotConstants.CONFIG);
@@ -21,10 +20,10 @@ public class PivotIO_Real implements PivotIO {
     var voltage = pivotMotor.getMotorVoltage();
     var statorCurrent = pivotMotor.getStatorCurrent();
 
-    position.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    temp.setUpdateFrequency(GlobalConstants.mainLoopFrequency / 4d);
-    voltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    statorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
+    position.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    temp.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY / 4d);
+    voltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    statorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     pivotMotor.optimizeBusUtilization();
   }
@@ -38,7 +37,7 @@ public class PivotIO_Real implements PivotIO {
     inputs.statorCurrent = pivotMotor.getStatorCurrent().getValueAsDouble();
     inputs.voltage = pivotMotor.getMotorVoltage().getValueAsDouble();
     inputs.position =
-        pivotMotor.getPosition().getValueAsDouble() * ShooterConstants.CONVERSION_FACTOR;
+        pivotMotor.getPosition().getValueAsDouble() * GlobalConstants.CONVERSION_FACTOR;
   }
 
   @Override
@@ -46,6 +45,6 @@ public class PivotIO_Real implements PivotIO {
     // Clamp to safe range then convert degrees to rotations for the motor controller
     positionVoltage.Position =
         MathUtil.clamp(setpoint, PivotConstants.MIN_SETPOINT, PivotConstants.MAX_SETPOINT)
-            / ShooterConstants.CONVERSION_FACTOR;
+            / GlobalConstants.CONVERSION_FACTOR;
   }
 }

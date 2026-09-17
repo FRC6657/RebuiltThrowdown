@@ -1,6 +1,5 @@
 package frc.robot.subsystems.intake;
 
-import frc.robot.subsystems.intake.IntakeConstants.Extension.PivotSetpoint;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface IntakeIO {
@@ -22,9 +21,9 @@ public interface IntakeIO {
 
   public default void updateInputs(IntakeIOInputs inputs) {}
 
-  public default void changeSetpoint(PivotSetpoint setpoint) {}
+  public default void changeSetpointP(double setpoint) {}
 
-  public default void changeSetpoint(double setpoint) {}
+  public default void changeSetpointR(double setpoint) {}
 
   public default boolean atSetpoint() {
     return false;

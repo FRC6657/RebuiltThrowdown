@@ -21,11 +21,11 @@ public class FlywheelIO_Real implements FlywheelIO {
     var voltage = flywheelMotor.getMotorVoltage();
     var statorCurrent = flywheelMotor.getSupplyCurrent();
 
-    velocity.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    acceleration.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    temp.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    voltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    statorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
+    velocity.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    acceleration.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    temp.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    voltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    statorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     flywheelMotor.optimizeBusUtilization();
   }

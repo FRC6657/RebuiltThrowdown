@@ -71,28 +71,28 @@ public class Superstructure {
         flywheel.changeSetpointC(0),
         floor.changeSetpoint(FloorConstants.Off),
         DisableShooting(),
-        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.RETRACTED_FAST),
-        intake.changeSetpoint(Roller.Off),
+        intake.changeSetpointP(30),
+        intake.changeSetpointR(Roller.Off),
         pivot.changeSetpointC(0));
   }
 
   public Command ExtendIntake() {
     return Commands.sequence(
         logMessage("Fuel Intake"),
-        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.EXTENDED_FAST),
-        intake.changeSetpoint(Roller.FORWARD));
+        intake.changeSetpointP(0),
+        intake.changeSetpointR(Roller.FORWARD));
   }
 
   public Command RetractIntake() {
     return Commands.sequence(
         logMessage("Intake Retract"),
-        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.RETRACTED_FAST));
+        intake.changeSetpointP(120));
   }
 
   public Command Dump() {
     return Commands.sequence(
-        intake.changeSetpoint(Roller.FORWARD),
-        intake.changeSetpoint(IntakeConstants.Extension.PivotSetpoint.EXTENDED_FAST),
+        intake.changeSetpointR(Roller.FORWARD),
+        intake.changeSetpointP(0),
         flywheel.changeSetpointC(-1000),
         FloorReverse());
   }

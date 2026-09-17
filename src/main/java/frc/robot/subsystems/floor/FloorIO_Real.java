@@ -26,12 +26,12 @@ public class FloorIO_Real implements FloorIO {
     var motorTwoVoltage = motorTwo.getMotorVoltage();
     var motorTwoStatorCurrent = motorTwo.getStatorCurrent();
 
-    motorOneTemp.setUpdateFrequency(GlobalConstants.mainLoopFrequency / 4);
-    motorOneVoltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    motorOneStatorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    motorTwoTemp.setUpdateFrequency(GlobalConstants.mainLoopFrequency / 4);
-    motorTwoVoltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    motorTwoStatorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
+    motorOneTemp.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY / 4);
+    motorOneVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    motorOneStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    motorTwoTemp.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY / 4);
+    motorTwoVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    motorTwoStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     motorOne.optimizeBusUtilization();
     motorTwo.optimizeBusUtilization();

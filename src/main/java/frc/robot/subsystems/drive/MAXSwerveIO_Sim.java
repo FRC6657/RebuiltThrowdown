@@ -62,8 +62,8 @@ public class MAXSwerveIO_Sim implements MAXSwerveIO {
         turnController.calculate(getTurnAngle().getRadians(), turnAngleSetpoint.getRadians()));
 
     // Step the simulation forward
-    driveSim.update(1 / GlobalConstants.mainLoopFrequency);
-    turnSim.update(1 / GlobalConstants.mainLoopFrequency);
+    driveSim.update(1 / GlobalConstants.MAIN_LOOP_FREQUENCY);
+    turnSim.update(1 / GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     // Update the inputs
     inputs.drivePositionMeters =

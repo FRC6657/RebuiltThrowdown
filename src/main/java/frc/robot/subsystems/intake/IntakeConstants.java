@@ -14,18 +14,11 @@ public class IntakeConstants {
 
     public static final DCMotor MOTOR = DCMotor.getFalcon500(1);
 
-    public static final double INITIAL_SETPOINT = 0; // in
+    public static final double INITIAL_SETPOINT = 0; // deg
 
-    public static final double MIN_SETPOINT = 0; // in (fully retracted)
-    public static final double MAX_SETPOINT = 12.375; // in (fully extended)
-    public static final double SHUFFLE_SETPOINT = 5.0; // in (partially extended)
-    public static final double POSITION_TOLERANCE = 0.5; // in
-
-    public static final double SHUFFLE_PERIOD = 1.5;
-
-    public static final double GEAR_RATIO = (5d / 1d) * (36d / 28d) * (28d / 15d);
-
-    public static final double CONVERSION_FACTOR = Math.PI; // Linear Inches Per Rotation
+    public static final double MIN_SETPOINT = 0; // deg
+    public static final double MAX_SETPOINT = 120; // deg (fully inside)
+    public static final double GEAR_RATIO = 1; // TODO: real gear ratio needed
 
     public static final double SUPPLY_LIMIT = 30; // Amps
     public static final double STATOR_LIMIT = 60; // Amps
@@ -43,32 +36,12 @@ public class IntakeConstants {
                     .withSupplyCurrentLimit(SUPPLY_LIMIT)
                     .withStatorCurrentLimitEnable(true)
                     .withSupplyCurrentLimitEnable(true));
-
-    public static enum PivotSetpoint {
-      RETRACTED_SLOW(MIN_SETPOINT + 1, 5, 40),
-      RETRACTED_FAST(MIN_SETPOINT + 1, 80, 160),
-      EXTENDED_SLOW(MAX_SETPOINT, 5, 40),
-      EXTENDED_FAST(MAX_SETPOINT, 160, 320),
-      SHUFFLE_IN(MIN_SETPOINT + 1, 80, 160),
-      SHUFFLE_OUT(SHUFFLE_SETPOINT, 80, 160),
-      Off(MIN_SETPOINT + 1, 0, 0);
-
-      public final double position;
-      public final double velocity;
-      public final double acceleration;
-
-      private PivotSetpoint(double position, double velocity, double acceleration) {
-        this.position = position;
-        this.velocity = velocity;
-        this.acceleration = acceleration;
-      }
-    }
   }
 
   public class Roller {
 
     public static final DCMotor MOTOR = DCMotor.getFalcon500(1);
-    public static final double GEAR_RATIO = 24d / 11d;
+    public static final double GEAR_RATIO = 1; //TODO: real ratio
 
     public static final TalonFXConfiguration CONFIG =
         new TalonFXConfiguration()
@@ -84,9 +57,7 @@ public class IntakeConstants {
                     .withStatorCurrentLimitEnable(true));
 
     public static final double Off = 0.0; // No power
-
     public static final double FORWARD = 12;
     public static final double REVERSE = -12;
-    public static final double SHUFFLE = 4;
   }
 }

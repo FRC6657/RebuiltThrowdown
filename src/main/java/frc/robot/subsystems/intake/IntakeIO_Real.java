@@ -1,10 +1,10 @@
 package frc.robot.subsystems.intake;
 
-import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
+import edu.wpi.first.math.MathUtil;
 import frc.robot.GlobalConstants;
-import frc.robot.subsystems.intake.IntakeConstants.Extension.PivotSetpoint;
 
 public class IntakeIO_Real implements IntakeIO {
 
@@ -12,8 +12,8 @@ public class IntakeIO_Real implements IntakeIO {
   private TalonFX rollerMotor = new TalonFX(GlobalConstants.CAN.Intake_Wheels.id);
 
   private VoltageOut rollerSetpoint = new VoltageOut(0);
-  private PivotSetpoint pivotSetpoint = PivotSetpoint.RETRACTED_FAST;
-  private final MotionMagicVoltage pivotRequest = new MotionMagicVoltage(0);
+  private PositionVoltage pivotPositionVoltage =
+      new PositionVoltage(IntakeConstants.Extension.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
 
   public IntakeIO_Real() {
 
@@ -27,13 +27,13 @@ public class IntakeIO_Real implements IntakeIO {
     var extensionVoltage = pivotMotor.getMotorVoltage();
     var extensionStatorCurrent = pivotMotor.getStatorCurrent();
 
-    extensionPosition.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    extensionVelocity.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    extensionAcceleration.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
+    extensionPosition.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    extensionVelocity.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    extensionAcceleration.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
     extensionTemp.setUpdateFrequency(
-        GlobalConstants.mainLoopFrequency / 4d); // Temp updates less often
-    extensionVoltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    extensionStatorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
+        GlobalConstants.MAIN_LOOP_FREQUENCY / 4d); // Temp updates less often
+    extensionVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    extensionStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     pivotMotor.optimizeBusUtilization();
 
@@ -41,9 +41,9 @@ public class IntakeIO_Real implements IntakeIO {
     var rollerStatorCurrent = rollerMotor.getSupplyCurrent();
     var rollerTemp = rollerMotor.getDeviceTemp();
 
-    rollerTemp.setUpdateFrequency(GlobalConstants.mainLoopFrequency / 4d);
-    rollerVoltage.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
-    rollerStatorCurrent.setUpdateFrequency(GlobalConstants.mainLoopFrequency);
+    rollerTemp.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY / 4d);
+    rollerVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    rollerStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     pivotMotor.setPosition(0);
 
@@ -53,35 +53,26 @@ public class IntakeIO_Real implements IntakeIO {
   @Override
   public void updateInputs(IntakeIOInputs inputs) {
 
-    pivotMotor.setControl(pivotRequest.withPosition(pivotSetpoint.position));
+    pivotMotor.setControl(pivotPositionVoltage);
 
     rollerMotor.setControl(rollerSetpoint);
 
     inputs.extensionPosition =
-        pivotMotor.getPosition().getValueAsDouble() * IntakeConstants.Extension.CONVERSION_FACTOR;
+        pivotMotor.getPosition().getValueAsDouble();
     inputs.extensionVelocity =
-        pivotMotor.getVelocity().getValueAsDouble() * IntakeConstants.Extension.CONVERSION_FACTOR;
+        pivotMotor.getVelocity().getValueAsDouble();
     inputs.extensionAcceleration =
-        pivotMotor.getAcceleration().getValueAsDouble()
-            * IntakeConstants.Extension.CONVERSION_FACTOR;
+        pivotMotor.getAcceleration().getValueAsDouble();
     inputs.extensionTemp = pivotMotor.getDeviceTemp().getValueAsDouble();
   }
 
   @Override
-  public void changeSetpoint(PivotSetpoint setpoint) {}
+  public void changeSetpointR(double setpoint) {}
 
   @Override
-  public void changeSetpoint(double setpoint) {
-    rollerSetpoint.Output = setpoint;
-  }
-
-  @Override
-  public boolean atSetpoint() {
-    //   return MathUtil.isNear(
-    //     extensionMotor.getGoal().position,
-    //       extensionMotor.getPosition().getValueAsDouble()
-    //           * IntakeConstants.Extension.CONVERSION_FACTOR,
-    //       IntakeConstants.Extension.POSITION_TOLERANCE);
-    return true; // FIX
+  public void changeSetpointP(double setpoint) {
+    pivotPositionVoltage.Position =
+        MathUtil.clamp(setpoint, IntakeConstants.Extension.MIN_SETPOINT, IntakeConstants.Extension.MAX_SETPOINT)
+            / GlobalConstants.CONVERSION_FACTOR;
   }
 }

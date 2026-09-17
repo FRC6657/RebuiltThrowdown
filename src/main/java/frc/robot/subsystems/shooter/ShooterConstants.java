@@ -9,8 +9,6 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class ShooterConstants {
-  public static final double CONVERSION_FACTOR = 360.0; // Degrees Per Rotation
-
   public class PivotConstants {
 
     public static final double INITIAL_SETPOINT = 30; // Deg TOTO: find real number
