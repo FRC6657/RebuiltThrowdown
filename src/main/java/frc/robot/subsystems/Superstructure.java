@@ -40,6 +40,7 @@ public class Superstructure {
     this.pivot = pivot;
 
     isShooting.onTrue(RunIndexer());
+    isShooting.onFalse(StopIndexer());
   }
 
   Command RunIndexer() {
