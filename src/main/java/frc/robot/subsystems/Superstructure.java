@@ -11,7 +11,6 @@ import frc.robot.subsystems.drive.MAXSwerve;
 import frc.robot.subsystems.floor.Floor;
 import frc.robot.subsystems.floor.FloorConstants;
 import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.intake.IntakeConstants;
 import frc.robot.subsystems.intake.IntakeConstants.Roller;
 import frc.robot.subsystems.shooter.flywheel.Flywheel;
 import frc.robot.subsystems.shooter.pivot.Pivot;
@@ -46,17 +45,9 @@ public class Superstructure {
   Command RunIndexer() {
     return Commands.parallel(
         Commands.sequence(
-          intake.changeSetpointP(120),
-          pivot.changeSetpointC(10),
-          flywheel.changeSetpointC(3000)
-        ),
+            intake.changeSetpointP(120), pivot.changeSetpointC(10), flywheel.changeSetpointC(3000)),
         Commands.repeatingSequence(
-          FloorForward(),
-          Commands.waitSeconds(3),
-          FloorReverse(),
-          Commands.waitSeconds(0.125)
-        )
-      );
+            FloorForward(), Commands.waitSeconds(3), FloorReverse(), Commands.waitSeconds(0.125)));
   }
 
   Command StopIndexer() {
@@ -101,9 +92,7 @@ public class Superstructure {
   }
 
   public Command RetractIntake() {
-    return Commands.sequence(
-        logMessage("Intake Retract"),
-        intake.changeSetpointP(120));
+    return Commands.sequence(logMessage("Intake Retract"), intake.changeSetpointP(120));
   }
 
   public Command Dump() {

@@ -13,7 +13,8 @@ public class IntakeIO_Real implements IntakeIO {
 
   private VoltageOut rollerSetpoint = new VoltageOut(0);
   private PositionVoltage pivotPositionVoltage =
-      new PositionVoltage(IntakeConstants.Extension.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
+      new PositionVoltage(
+          IntakeConstants.Extension.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
 
   public IntakeIO_Real() {
 
@@ -69,7 +70,10 @@ public class IntakeIO_Real implements IntakeIO {
   @Override
   public void changeSetpointP(double setpoint) {
     pivotPositionVoltage.Position =
-        MathUtil.clamp(setpoint, IntakeConstants.Extension.MIN_SETPOINT, IntakeConstants.Extension.MAX_SETPOINT)
+        MathUtil.clamp(
+                setpoint,
+                IntakeConstants.Extension.MIN_SETPOINT,
+                IntakeConstants.Extension.MAX_SETPOINT)
             / GlobalConstants.CONVERSION_FACTOR;
   }
 }

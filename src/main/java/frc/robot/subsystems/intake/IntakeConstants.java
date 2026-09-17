@@ -41,7 +41,7 @@ public class IntakeConstants {
   public class Roller {
 
     public static final DCMotor MOTOR = DCMotor.getFalcon500(1);
-    public static final double GEAR_RATIO = 1; //TODO: real ratio
+    public static final double GEAR_RATIO = 1; // TODO: real ratio
 
     public static final TalonFXConfiguration CONFIG =
         new TalonFXConfiguration()
