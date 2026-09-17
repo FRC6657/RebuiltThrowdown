@@ -20,20 +20,20 @@ public class IntakeIO_Real implements IntakeIO {
     pivotMotor.getConfigurator().apply(IntakeConstants.Extension.CONFIG);
     rollerMotor.getConfigurator().apply(IntakeConstants.Roller.CONFIG);
 
-    var extensionPosition = pivotMotor.getPosition();
-    var extensionVelocity = pivotMotor.getVelocity();
-    var extensionAcceleration = pivotMotor.getAcceleration();
-    var extensionTemp = pivotMotor.getDeviceTemp();
-    var extensionVoltage = pivotMotor.getMotorVoltage();
-    var extensionStatorCurrent = pivotMotor.getStatorCurrent();
+    var pivotPosition = pivotMotor.getPosition();
+    var pivotVelocity = pivotMotor.getVelocity();
+    var pivotAcceleration = pivotMotor.getAcceleration();
+    var pivotTemp = pivotMotor.getDeviceTemp();
+    var pivotVoltage = pivotMotor.getMotorVoltage();
+    var pivotStatorCurrent = pivotMotor.getStatorCurrent();
 
-    extensionPosition.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    extensionVelocity.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    extensionAcceleration.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    extensionTemp.setUpdateFrequency(
+    pivotPosition.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    pivotVelocity.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    pivotAcceleration.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    pivotTemp.setUpdateFrequency(
         GlobalConstants.MAIN_LOOP_FREQUENCY / 4d); // Temp updates less often
-    extensionVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    extensionStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    pivotVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
+    pivotStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
     pivotMotor.optimizeBusUtilization();
 
@@ -57,13 +57,10 @@ public class IntakeIO_Real implements IntakeIO {
 
     rollerMotor.setControl(rollerSetpoint);
 
-    inputs.extensionPosition =
-        pivotMotor.getPosition().getValueAsDouble();
-    inputs.extensionVelocity =
-        pivotMotor.getVelocity().getValueAsDouble();
-    inputs.extensionAcceleration =
-        pivotMotor.getAcceleration().getValueAsDouble();
-    inputs.extensionTemp = pivotMotor.getDeviceTemp().getValueAsDouble();
+    inputs.pivotPosition = pivotMotor.getPosition().getValueAsDouble();
+    inputs.pivotVelocity = pivotMotor.getVelocity().getValueAsDouble();
+    inputs.pivotAcceleration = pivotMotor.getAcceleration().getValueAsDouble();
+    inputs.pivotTemp = pivotMotor.getDeviceTemp().getValueAsDouble();
   }
 
   @Override

@@ -7,12 +7,12 @@ public interface IntakeIO {
   @AutoLog
   public static class IntakeIOInputs {
 
-    public double extensionPosition = 0.0; // Inches
-    public double extensionVelocity = 0.0; // Inches per second
-    public double extensionAcceleration = 0.0; // Inches per second per second
-    public double extensionTemp; // Celsius
-    public double extensionVoltage = 0.0; // Volts
-    public double extensionStatorCurrent = 0.0; // Amps
+    public double pivotPosition = 0.0; // Inches
+    public double pivotVelocity = 0.0; // Inches per second
+    public double pivotAcceleration = 0.0; // Inches per second per second
+    public double pivotTemp; // Celsius
+    public double pivotVoltage = 0.0; // Volts
+    public double pivotStatorCurrent = 0.0; // Amps
 
     public double rollerTemp = 0.0; // Celsius
     public double rollerVoltage = 0.0; // Volts
