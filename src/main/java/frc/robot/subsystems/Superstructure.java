@@ -29,11 +29,7 @@ public class Superstructure {
   @AutoLogOutput(key = "RobotStates/Shooting")
   public boolean shooting = false;
 
-  @AutoLogOutput(key = "RobotStates/Tracking")
-  public boolean tracking = false;
-
   public Trigger isShooting = new Trigger(() -> shooting);
-  public Trigger isTracking = new Trigger(() -> tracking);
 
   public Superstructure(
       MAXSwerve drivebase, Floor floor, Intake intake, Flywheel flywheel, Pivot pivot) {

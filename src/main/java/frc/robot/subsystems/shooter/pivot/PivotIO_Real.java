@@ -11,9 +11,7 @@ public class PivotIO_Real implements PivotIO {
   private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Shooter_Pivot.id);
 
   private PositionVoltage positionVoltage =
-      new PositionVoltage(
-          PivotConstants.INITIAL_SETPOINT
-              / ShooterConstants.CONVERSION_FACTOR); // TODO: Replace with real number
+      new PositionVoltage(PivotConstants.INITIAL_SETPOINT / ShooterConstants.CONVERSION_FACTOR);
 
   public PivotIO_Real() {
     pivotMotor.getConfigurator().apply(PivotConstants.CONFIG);
