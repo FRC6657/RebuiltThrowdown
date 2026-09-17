@@ -45,8 +45,11 @@ public class Superstructure {
 
   Command RunIndexer() {
     return Commands.parallel(
-        Commands.repeatingSequence(
-          intake.changeSetpointP(120)),
+        Commands.sequence(
+          intake.changeSetpointP(120),
+          pivot.changeSetpointC(10),
+          flywheel.changeSetpointC(3000)
+        ),
         Commands.repeatingSequence(
           FloorForward(),
           Commands.waitSeconds(3),
@@ -57,7 +60,7 @@ public class Superstructure {
   }
 
   Command StopIndexer() {
-    return Commands.parallel(FloorOff(), intake.changeSetpointP(0));
+    return Commands.parallel(FloorOff(), intake.changeSetpointP(0), flywheel.changeSetpointC(0));
   }
 
   // #region State Toggles
