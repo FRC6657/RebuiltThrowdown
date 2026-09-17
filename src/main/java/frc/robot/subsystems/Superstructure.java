@@ -17,6 +17,10 @@ import frc.robot.subsystems.shooter.pivot.Pivot;
 import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 
+import choreo.auto.AutoFactory;
+import choreo.auto.AutoRoutine;
+import choreo.auto.AutoTrajectory;
+
 /** The core class where all robot commands live. */
 public class Superstructure {
   MAXSwerve drivebase;
@@ -115,5 +119,16 @@ public class Superstructure {
 
   public Command FloorOff() {
     return Commands.sequence(logMessage("Floor Off"), floor.changeSetpoint(FloorConstants.Off));
+  }
+
+//#region Autos
+  public AutoRoutine TaxiOnly(AutoFactory factory) {
+    final AutoRoutine routine = factory.newRoutine("TaxiOnly");
+
+    final AutoTrajectory Start = routine.trajectory("TaxiOnly", 0);
+
+    routine.active().onTrue(Start.resetOdometry());
+
+    return routine;
   }
 }
