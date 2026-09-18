@@ -133,6 +133,10 @@ public class Robot extends LoggedRobot {
                     -MathUtil.applyDeadband(driver.getRightX(), 0.15)
                         * DriveConstants.kMaxAngularVelocity
                         * 0.5)));
+    driver.rightTrigger().onTrue(superstructure.EnableShooting());
+    driver.rightTrigger().onFalse(superstructure.DisableShooting());
+    driver.leftTrigger().onTrue(superstructure.ToggleShooting());
+    
     autoChooser.addOption("Nothing", Commands.print("Nothing Auto Selected"));
     autoChooser.addOption("Taxi", Commands.sequence(drivebase.runVelocity(() -> new ChassisSpeeds(1, 0, 0)).withTimeout(2)));
   }
