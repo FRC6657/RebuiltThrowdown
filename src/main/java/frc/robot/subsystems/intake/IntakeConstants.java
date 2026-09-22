@@ -10,7 +10,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 
 public class IntakeConstants {
 
-  public class Extension {
+  public class Pivot {
 
     public static final DCMotor MOTOR = DCMotor.getFalcon500(1);
 

@@ -14,11 +14,11 @@ public class IntakeIO_Real implements IntakeIO {
   private VoltageOut rollerSetpoint = new VoltageOut(0);
   private PositionVoltage pivotPositionVoltage =
       new PositionVoltage(
-          IntakeConstants.Extension.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
+          IntakeConstants.Pivot.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
 
   public IntakeIO_Real() {
 
-    pivotMotor.getConfigurator().apply(IntakeConstants.Extension.CONFIG);
+    pivotMotor.getConfigurator().apply(IntakeConstants.Pivot.CONFIG);
     rollerMotor.getConfigurator().apply(IntakeConstants.Roller.CONFIG);
 
     var pivotPosition = pivotMotor.getPosition();
@@ -72,8 +72,8 @@ public class IntakeIO_Real implements IntakeIO {
     pivotPositionVoltage.Position =
         MathUtil.clamp(
                 setpoint,
-                IntakeConstants.Extension.MIN_SETPOINT,
-                IntakeConstants.Extension.MAX_SETPOINT)
+                IntakeConstants.Pivot.MIN_SETPOINT,
+                IntakeConstants.Pivot.MAX_SETPOINT)
             / GlobalConstants.CONVERSION_FACTOR;
   }
 }
