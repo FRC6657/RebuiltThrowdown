@@ -35,7 +35,7 @@ public class IntakeIO_Sim implements IntakeIO {
           DCMotor.getFalcon500(1));
 
   public IntakeIO_Sim() {
-        pivotMotor
+    pivotMotor
         .getConfigurator()
         .apply(
             IntakeConstants.Pivot.CONFIG.withCurrentLimits(
@@ -57,17 +57,22 @@ public class IntakeIO_Sim implements IntakeIO {
     pivotMotorSim.setSupplyVoltage(12);
     pivotModel.setInputVoltage(pivotMotorSim.getMotorVoltage());
     pivotModel.update(1 / GlobalConstants.MAIN_LOOP_FREQUENCY);
-    pivotMotorSim.setRawRotorPosition(pivotModel.getAngularPosition().times(IntakeConstants.Pivot.GEAR_RATIO));
-    pivotMotorSim.setRotorVelocity(pivotModel.getAngularVelocity().times(IntakeConstants.Pivot.GEAR_RATIO));
+    pivotMotorSim.setRawRotorPosition(
+        pivotModel.getAngularPosition().times(IntakeConstants.Pivot.GEAR_RATIO));
+    pivotMotorSim.setRotorVelocity(
+        pivotModel.getAngularVelocity().times(IntakeConstants.Pivot.GEAR_RATIO));
 
     var rollerMotorSim = rollerMotor.getSimState();
     rollerMotorSim.setSupplyVoltage(12);
     rollerModel.setInputVoltage(rollerMotorSim.getMotorVoltage());
     rollerModel.update(1 / GlobalConstants.MAIN_LOOP_FREQUENCY);
-    rollerMotorSim.setRawRotorPosition(rollerModel.getAngularPosition().times(IntakeConstants.Roller.GEAR_RATIO));
-    rollerMotorSim.setRotorVelocity(rollerModel.getAngularVelocity().times(IntakeConstants.Roller.GEAR_RATIO));
+    rollerMotorSim.setRawRotorPosition(
+        rollerModel.getAngularPosition().times(IntakeConstants.Roller.GEAR_RATIO));
+    rollerMotorSim.setRotorVelocity(
+        rollerModel.getAngularVelocity().times(IntakeConstants.Roller.GEAR_RATIO));
 
-    inputs.pivotPosition = pivotMotor.getPosition().getValueAsDouble() * GlobalConstants.CONVERSION_FACTOR;
+    inputs.pivotPosition =
+        pivotMotor.getPosition().getValueAsDouble() * GlobalConstants.CONVERSION_FACTOR;
     inputs.pivotVelocity = pivotMotor.getVelocity().getValueAsDouble();
     inputs.pivotAcceleration = pivotMotor.getAcceleration().getValueAsDouble();
     inputs.pivotTemp = pivotMotor.getDeviceTemp().getValueAsDouble();

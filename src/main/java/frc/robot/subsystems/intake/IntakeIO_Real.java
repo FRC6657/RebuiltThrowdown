@@ -46,7 +46,8 @@ public class IntakeIO_Real implements IntakeIO {
     rollerVoltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
     rollerStatorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
 
-    pivotMotor.setPosition(IntakeConstants.Pivot.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
+    pivotMotor.setPosition(
+        IntakeConstants.Pivot.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
 
     rollerMotor.optimizeBusUtilization();
   }
@@ -58,7 +59,8 @@ public class IntakeIO_Real implements IntakeIO {
 
     rollerMotor.setControl(rollerSetpoint);
 
-    inputs.pivotPosition = pivotMotor.getPosition().getValueAsDouble() * GlobalConstants.CONVERSION_FACTOR;
+    inputs.pivotPosition =
+        pivotMotor.getPosition().getValueAsDouble() * GlobalConstants.CONVERSION_FACTOR;
     inputs.pivotVelocity = pivotMotor.getVelocity().getValueAsDouble();
     inputs.pivotAcceleration = pivotMotor.getAcceleration().getValueAsDouble();
     inputs.pivotTemp = pivotMotor.getDeviceTemp().getValueAsDouble();

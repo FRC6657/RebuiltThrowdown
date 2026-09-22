@@ -24,7 +24,7 @@ import frc.robot.subsystems.floor.FloorIO_Real;
 import frc.robot.subsystems.floor.FloorIO_Sim;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO_Real;
-// import frc.robot.subsystems.intake.IntakeIO_Sim;
+import frc.robot.subsystems.intake.IntakeIO_Sim;
 import frc.robot.subsystems.shooter.flywheel.Flywheel;
 import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Real;
 // import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Sim;
@@ -84,19 +84,22 @@ public class Robot extends LoggedRobot {
                   new MAXSwerveIO_Sim()
                 });
     floor = new Floor(RobotBase.isReal() ? new FloorIO_Real() : new FloorIO_Sim());
-    intake = new Intake(RobotBase.isReal() ? new IntakeIO_Real() : new IntakeIO_Real()); // TODO: Sim
-    flywheel = new Flywheel(RobotBase.isReal() ? new FlywheelIO_Real() : new FlywheelIO_Real()); // TODO: Sim
+    intake =
+        new Intake(RobotBase.isReal() ? new IntakeIO_Real() : new IntakeIO_Sim());
+    flywheel =
+        new Flywheel(
+            RobotBase.isReal() ? new FlywheelIO_Real() : new FlywheelIO_Real()); // TODO: Sim
     pivot = new Pivot(RobotBase.isReal() ? new PivotIO_Real() : new PivotIO_Real()); // TODO: Sim
 
     superstructure = new Superstructure(drivebase, floor, intake, flywheel, pivot);
-      
+
     autoChooser.addDefaultOption("Do Nothing", Commands.none());
   }
 
   @SuppressWarnings(value = "resource")
   @Override
   public void robotInit() {
-    Logger.recordMetadata("Codebase", "6657 MAXSwerve 2026");
+    Logger.recordMetadata("Codebase", "6657 MAXSwerve 2026 Offseason");
     switch (mode) {
       case REAL:
         Logger.addDataReceiver(new WPILOGWriter("/U")); // Log to a USB stick
@@ -136,9 +139,11 @@ public class Robot extends LoggedRobot {
     driver.rightTrigger().onTrue(superstructure.EnableShooting());
     driver.rightTrigger().onFalse(superstructure.DisableShooting());
     driver.leftTrigger().onTrue(superstructure.ToggleShooting());
-    
+
     autoChooser.addOption("Nothing", Commands.print("Nothing Auto Selected"));
-    autoChooser.addOption("Taxi", Commands.sequence(drivebase.runVelocity(() -> new ChassisSpeeds(1, 0, 0)).withTimeout(2)));
+    autoChooser.addOption(
+        "Taxi",
+        Commands.sequence(drivebase.runVelocity(() -> new ChassisSpeeds(1, 0, 0)).withTimeout(2)));
   }
 
   @Override
