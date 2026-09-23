@@ -27,7 +27,7 @@ import frc.robot.subsystems.intake.IntakeIO_Real;
 import frc.robot.subsystems.intake.IntakeIO_Sim;
 import frc.robot.subsystems.shooter.flywheel.Flywheel;
 import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Real;
-// import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Sim;
+import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Sim;
 import frc.robot.subsystems.shooter.pivot.Pivot;
 import frc.robot.subsystems.shooter.pivot.PivotIO_Real;
 // import frc.robot.subsystems.shooter.pivot.PivotIO_Sim;
@@ -84,11 +84,8 @@ public class Robot extends LoggedRobot {
                   new MAXSwerveIO_Sim()
                 });
     floor = new Floor(RobotBase.isReal() ? new FloorIO_Real() : new FloorIO_Sim());
-    intake =
-        new Intake(RobotBase.isReal() ? new IntakeIO_Real() : new IntakeIO_Sim());
-    flywheel =
-        new Flywheel(
-            RobotBase.isReal() ? new FlywheelIO_Real() : new FlywheelIO_Real()); // TODO: Sim
+    intake = new Intake(RobotBase.isReal() ? new IntakeIO_Real() : new IntakeIO_Sim());
+    flywheel = new Flywheel(RobotBase.isReal() ? new FlywheelIO_Real() : new FlywheelIO_Sim());
     pivot = new Pivot(RobotBase.isReal() ? new PivotIO_Real() : new PivotIO_Real()); // TODO: Sim
 
     superstructure = new Superstructure(drivebase, floor, intake, flywheel, pivot);
