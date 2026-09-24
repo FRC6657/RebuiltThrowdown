@@ -16,6 +16,7 @@ public class ShooterConstants {
     public static final double MAX_SETPOINT = 180; // Deg TODO: Check CAD
     public static final double SUPPLY_LIMIT = 30; // Ampss
     public static final double STATOR_LIMIT = 60; // Amps
+    public static final double GEAR_RATIO = 1; // 1:1 Ratio TODO: Check CAD
 
     public static final TalonFXConfiguration CONFIG =
         new TalonFXConfiguration()

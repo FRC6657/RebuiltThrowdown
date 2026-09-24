@@ -29,20 +29,6 @@ public class FlywheelIO_Sim implements FlywheelIO {
                 new CurrentLimitsConfigs()
                     .withStatorCurrentLimitEnable(false)
                     .withSupplyCurrentLimitEnable(false)));
-
-    var velocity = flywheelMotor.getVelocity();
-    var acceleration = flywheelMotor.getAcceleration();
-    var temp = flywheelMotor.getDeviceTemp();
-    var voltage = flywheelMotor.getMotorVoltage();
-    var statorCurrent = flywheelMotor.getSupplyCurrent();
-
-    velocity.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    acceleration.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    temp.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY / 4d);
-    voltage.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-    statorCurrent.setUpdateFrequency(GlobalConstants.MAIN_LOOP_FREQUENCY);
-
-    flywheelMotor.optimizeBusUtilization();
   }
 
   @Override
@@ -66,9 +52,9 @@ public class FlywheelIO_Sim implements FlywheelIO {
     inputs.velocity = flywheelMotor.getVelocity().getValueAsDouble() * 60d;
     inputs.acceleration = flywheelMotor.getAcceleration().getValueAsDouble() * 60d;
 
-    inputs.temp = flywheelMotor.getDeviceTemp().getValueAsDouble();
+    inputs.temp = 0;
     inputs.voltage = flywheelMotor.getMotorVoltage().getValueAsDouble();
-    inputs.statorCurrent = flywheelMotor.getStatorCurrent().getValueAsDouble();
+    inputs.statorCurrent = flywheelModel.getCurrentDrawAmps();
   }
 
   @Override

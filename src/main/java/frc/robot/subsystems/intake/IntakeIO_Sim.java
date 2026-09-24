@@ -75,13 +75,13 @@ public class IntakeIO_Sim implements IntakeIO {
         pivotMotor.getPosition().getValueAsDouble() * GlobalConstants.CONVERSION_FACTOR;
     inputs.pivotVelocity = pivotMotor.getVelocity().getValueAsDouble();
     inputs.pivotAcceleration = pivotMotor.getAcceleration().getValueAsDouble();
-    inputs.pivotTemp = pivotMotor.getDeviceTemp().getValueAsDouble();
+    inputs.pivotTemp = 0;
     inputs.pivotVoltage = pivotMotor.getMotorVoltage().getValueAsDouble();
-    inputs.pivotStatorCurrent = pivotMotor.getStatorCurrent().getValueAsDouble();
+    inputs.pivotStatorCurrent = pivotModel.getCurrentDrawAmps();
 
-    inputs.rollerTemp = rollerMotor.getDeviceTemp().getValueAsDouble();
+    inputs.rollerTemp = 0;
     inputs.rollerVoltage = rollerMotor.getMotorVoltage().getValueAsDouble();
-    inputs.rollerStatorCurrent = rollerMotor.getStatorCurrent().getValueAsDouble();
+    inputs.rollerStatorCurrent = rollerModel.getCurrentDrawAmps();
   }
 
   @Override
