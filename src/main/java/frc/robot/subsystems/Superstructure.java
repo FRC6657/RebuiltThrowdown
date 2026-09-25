@@ -28,6 +28,9 @@ public class Superstructure {
   @AutoLogOutput(key = "RobotStates/Shooting")
   public boolean shooting = false;
 
+  @AutoLogOutput(key = "RobotStates/KeepRoller")
+  public boolean keepRoller = false;
+
   public Trigger isShooting = new Trigger(() -> shooting);
 
   public Superstructure(
@@ -92,15 +95,32 @@ public class Superstructure {
   }
 
   public Command RetractIntake() {
-    return Commands.sequence(logMessage("Intake Retract"), intake.changeSetpointP(120));
+    if (keepRoller) {
+      return Commands.sequence(
+          logMessage("Intake Retracted, Roller Enabled"), intake.changeSetpointP(120));
+    } else {
+      return Commands.sequence(
+          logMessage("Intake Retracted, Roller Disabled"),
+          intake.changeSetpointP(120),
+          intake.changeSetpointR(0));
+    }
   }
 
-  public Command Dump() {
+  public Command ToggleRoller() {
+    return Commands.runOnce(() -> keepRoller = !keepRoller);
+  }
+
+  public Command EnableDump() {
     return Commands.sequence(
         intake.changeSetpointR(Roller.FORWARD),
         intake.changeSetpointP(0),
         flywheel.changeSetpointC(-1000),
         FloorReverse());
+  }
+
+  public Command DisableDump() {
+    return Commands.sequence(
+        intake.changeSetpointR(Roller.Off), flywheel.changeSetpointC(0), FloorOff());
   }
 
   public Command FloorForward() {

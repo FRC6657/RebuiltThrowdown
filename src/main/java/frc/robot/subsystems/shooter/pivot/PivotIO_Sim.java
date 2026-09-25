@@ -3,7 +3,6 @@ package frc.robot.subsystems.shooter.pivot;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
@@ -13,12 +12,16 @@ import frc.robot.subsystems.shooter.ShooterConstants;
 import frc.robot.subsystems.shooter.ShooterConstants.PivotConstants;
 
 public class PivotIO_Sim implements PivotIO {
-    private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Shooter_Pivot.id);
+  private TalonFX pivotMotor = new TalonFX(GlobalConstants.CAN.Shooter_Pivot.id);
 
   private PositionVoltage positionVoltage =
       new PositionVoltage(PivotConstants.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
 
-    private DCMotorSim pivotModel = new DCMotorSim(LinearSystemId.createDCMotorSystem(DCMotor.getFalcon500(1), 0.0001, PivotConstants.GEAR_RATIO), DCMotor.getFalcon500(1));
+  private DCMotorSim pivotModel =
+      new DCMotorSim(
+          LinearSystemId.createDCMotorSystem(
+              DCMotor.getFalcon500(1), 0.0001, PivotConstants.GEAR_RATIO),
+          DCMotor.getFalcon500(1));
 
   public PivotIO_Sim() {
     pivotMotor
@@ -28,7 +31,8 @@ public class PivotIO_Sim implements PivotIO {
                 new CurrentLimitsConfigs()
                     .withStatorCurrentLimitEnable(false)
                     .withSupplyCurrentLimitEnable(false)));
-    pivotMotor.setPosition(ShooterConstants.PivotConstants.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
+    pivotMotor.setPosition(
+        ShooterConstants.PivotConstants.INITIAL_SETPOINT / GlobalConstants.CONVERSION_FACTOR);
   }
 
   @Override

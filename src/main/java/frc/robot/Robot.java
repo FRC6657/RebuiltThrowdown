@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Superstructure;
 import frc.robot.subsystems.drive.DrivebaseConstants.DriveConstants;
@@ -63,7 +64,7 @@ public class Robot extends LoggedRobot {
 
   // Driver Controllers
   private CommandXboxController driver = new CommandXboxController(0);
-  private CommandXboxController operator = new CommandXboxController(1);
+  private CommandGenericHID operator = new CommandGenericHID(1);
 
   public Robot() {
 
@@ -136,6 +137,15 @@ public class Robot extends LoggedRobot {
     driver.rightTrigger().onTrue(superstructure.EnableShooting());
     driver.rightTrigger().onFalse(superstructure.DisableShooting());
     driver.leftTrigger().onTrue(superstructure.ToggleShooting());
+
+    operator.button(1).onTrue(superstructure.FloorForward()).onFalse(superstructure.FloorOff());
+    operator.button(2).onTrue(superstructure.FloorReverse()).onFalse(superstructure.FloorOff());
+    operator.button(3).onTrue(superstructure.EnableDump()).onFalse(superstructure.DisableDump());
+    operator
+        .button(4)
+        .onTrue(superstructure.ExtendIntake())
+        .onFalse(superstructure.RetractIntake());
+    operator.button(5).onTrue(superstructure.ToggleRoller());
 
     autoChooser.addOption("Nothing", Commands.print("Nothing Auto Selected"));
     autoChooser.addOption(
