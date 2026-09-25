@@ -31,7 +31,7 @@ import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Real;
 import frc.robot.subsystems.shooter.flywheel.FlywheelIO_Sim;
 import frc.robot.subsystems.shooter.pivot.Pivot;
 import frc.robot.subsystems.shooter.pivot.PivotIO_Real;
-// import frc.robot.subsystems.shooter.pivot.PivotIO_Sim;
+import frc.robot.subsystems.shooter.pivot.PivotIO_Sim;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -87,7 +87,7 @@ public class Robot extends LoggedRobot {
     floor = new Floor(RobotBase.isReal() ? new FloorIO_Real() : new FloorIO_Sim());
     intake = new Intake(RobotBase.isReal() ? new IntakeIO_Real() : new IntakeIO_Sim());
     flywheel = new Flywheel(RobotBase.isReal() ? new FlywheelIO_Real() : new FlywheelIO_Sim());
-    pivot = new Pivot(RobotBase.isReal() ? new PivotIO_Real() : new PivotIO_Real()); // TODO: Sim
+    pivot = new Pivot(RobotBase.isReal() ? new PivotIO_Real() : new PivotIO_Sim());
 
     superstructure = new Superstructure(drivebase, floor, intake, flywheel, pivot);
 
